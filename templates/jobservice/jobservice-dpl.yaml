@@ -19,8 +19,8 @@ spec:
     spec:
       containers:
       - name: jobservice
-        image: {{ .Values.jobservice.image.repository }}:{{ .Values.jobservice.image.tag }}
-        imagePullPolicy: {{ .Values.jobservice.image.pullPolicy }}
+        image: {{ .Values_jobservice_image_repository }}:{{ .Values_jobservice_image_tag }}
+        imagePullPolicy: {{ .Values_jobservice_image_pullPolicy }}
         envFrom:
         - secretRef:
             name: "harbor-key-file"
