@@ -26,7 +26,7 @@ spec:
         - configMapRef:
             name: "{{ template "harbor.fullname" . }}-adminserver"
         - secretRef:
-            name: "Harbor-key-file"
+            name: "harbor-key-file"
         env:
           - name: PORT
             value: "8080"
@@ -43,7 +43,7 @@ spec:
       volumes:
       - name: adminserver-key
         secret:
-          secretName: "Harbor-key-file"
+          secretName: "harbor-key-file"
           items:
           - key: secretKey
             path: key

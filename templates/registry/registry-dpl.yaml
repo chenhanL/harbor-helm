@@ -27,8 +27,8 @@ spec:
           - name: REGISTRY_HTTP_SECRET
             valueFrom:
               secretKeyRef:
-                name: "Harbor-key-file"
-                key: registryHttpSecret
+                name: "harbor-key-file"
+                key: httpSecret
         ports:
         - containerPort: 5000
         - containerPort: 5001
@@ -42,7 +42,7 @@ spec:
       volumes:
       - name: registry-root-certificate
         secret:
-          secretName: "Harbor-key-file"
+          secretName: "harbor-key-file"
       - name: registry-config
         configMap:
           name: "{{ template "harbor.fullname" . }}-registry"

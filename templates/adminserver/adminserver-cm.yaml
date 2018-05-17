@@ -14,6 +14,7 @@ data:
   MYSQL_PORT: "{{ .Values.mysql_port }}"
   MYSQL_USR: "{{ .Values.mysql_user }}"
   MYSQL_DATABASE: "{{ .Values.mysql_database }}"
+  MYSQL_PWD: "{{ .Values.mysql_pwd }}"
   EXT_ENDPOINT: "https://{{ .Values.externalDomain }}"
   UI_URL: "http://{{ template "harbor.fullname" . }}-ui"
   JOBSERVICE_URL: "http://{{ template "harbor.fullname" . }}-jobservice"

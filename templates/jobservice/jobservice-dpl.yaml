@@ -21,11 +21,9 @@ spec:
       - name: jobservice
         image: {{ .Values.jobservice.image.repository }}:{{ .Values.jobservice.image.tag }}
         imagePullPolicy: {{ .Values.jobservice.image.pullPolicy }}
-        resources:
-{{ toYaml .Values.jobservice.resources | indent 10 }}
         envFrom:
         - secretRef:
-            name: "{{ template "harbor.fullname" . }}-jobservice"
+            name: "harbor-key-file"
         env:
           - name: LOG_LEVEL
             value: debug
@@ -50,7 +48,7 @@ spec:
           name: "{{ template "harbor.fullname" . }}-jobservice"
       - name: jobservice-secrets
         secret:
-          secretName: "Harbor-key-file"
+          secretName: "harbor-key-file"
           items:
             - key: secretKey
               path: key
