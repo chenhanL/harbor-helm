@@ -23,11 +23,11 @@ spec:
         imagePullPolicy: {{ .Values.registry_image_pullPolicy }}
         args: ["serve", "/etc/registry/config.yml"]
         env:
-          - name: REGISTRY_HTTP_SECRET
-            valueFrom:
-              secretKeyRef:
-                name: "harbor-key-file"
-                key: httpSecret
+        - name: REGISTRY_HTTP_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: "harbor-key-file"
+              key: httpSecret
         ports:
         - containerPort: 5000
         - containerPort: 5001
