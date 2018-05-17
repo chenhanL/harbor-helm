@@ -29,7 +29,7 @@ data:
   LDAP_SEARCH_DN: "{{ .Values.adminserver_ldap_searchDN }}"
   LDAP_SEARCH_PWD: "{{ .Values.adminserver_ldap_searchPWD }}"
   LDAP_BASE_DN: "{{ .Values.adminserver_ldap_baseDN }}"
-  LDAP_FILTER: "{{ .Values.adminserver.ldap.filter }}"
+ # LDAP_FILTER: "{{ .Values.adminserver.ldap.filter }}"
   LDAP_UID: "{{ .Values.adminserver_ldap_uid }}"
   LDAP_SCOPE: "{{ .Values.adminserver_ldap_scope }}"
   LDAP_TIMEOUT: "{{ .Values.adminserver_ldap_timeout }}"
