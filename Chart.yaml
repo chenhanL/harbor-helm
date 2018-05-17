@@ -1,0 +1,17 @@
+name: harbor
+version: 0.2
+appVersion: 1.5.0
+description: An Enterprise-class Docker Registry by VMware
+keywords:
+- vmware
+- docker
+- registry
+- harbor
+home: https://github.com/vmware/harbor
+icon: https://github.com/vmware/harbor/blob/master/docs/img/harbor_logo.png
+sources:
+- https://github.com/chenhanL/harbor-helm
+maintainers:
+- name: Li Ning
+  email: lining@sensetime.com
+engine: gotpl

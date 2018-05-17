@@ -1,0 +1,49 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: "{{ template "harbor.fullname" . }}-adminserver"
+  labels:
+{{ include "harbor.labels" . | indent 4 }}
+    component: adminserver
+spec:
+  replicas: 1
+  serviceName: "{{ template "harbor.fullname" . }}-adminserver"
+  selector:
+    matchLabels:
+{{ include "harbor.matchLabels" . | indent 6 }}
+      component: adminserver
+  template:
+    metadata:
+      labels:
+{{ include "harbor.labels" . | indent 8 }}
+        component: adminserver
+    spec:
+      containers:
+      - name: adminserver
+        image: "{{ .Values.adminserver_image_repository }}:{{ .Values.adminserver_image_tag }}"
+        imagePullPolicy: "{{ .Values.adminserver_image_pullPolicy }}"
+        envFrom:
+        - configMapRef:
+            name: "{{ template "harbor.fullname" . }}-adminserver"
+        - secretRef:
+            name: "Harbor-key-file"
+        env:
+          - name: PORT
+            value: "8080"
+          - name: JSON_CFG_STORE_PATH
+            value: /etc/adminserver/config/config.json
+          - name: KEY_PATH
+            value: /etc/adminserver/key
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: adminserver-key
+          mountPath: /etc/adminserver/key
+          subPath: key
+      volumes:
+      - name: adminserver-key
+        secret:
+          secretName: "Harbor-key-file"
+          items:
+          - key: secretKey
+            path: key

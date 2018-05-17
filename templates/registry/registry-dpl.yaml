@@ -1,0 +1,48 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: "{{ template "harbor.fullname" . }}-registry"
+  labels:
+{{ include "harbor.labels" . | indent 4 }}
+    component: registry
+spec:
+  replicas: 1
+  serviceName: "{{ template "harbor.fullname" . }}-registry"
+  selector:
+    matchLabels:
+{{ include "harbor.matchLabels" . | indent 6 }}
+      component: registry
+  template:
+    metadata:
+      labels:
+{{ include "harbor.labels" . | indent 8 }}
+        component: registry
+    spec:
+      containers:
+      - name: registry
+        image: {{ .Values.registry_image_repository }}:{{ .Values.registry_image_tag }}
+        imagePullPolicy: {{ .Values.registry_image_pullPolicy }}
+        args: ["serve", "/etc/registry/config.yml"]
+        env:
+          - name: REGISTRY_HTTP_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: "Harbor-key-file"
+                key: registryHttpSecret
+        ports:
+        - containerPort: 5000
+        - containerPort: 5001
+        volumeMounts:
+        - name: registry-root-certificate
+          mountPath: /etc/registry/root.crt
+          subPath: root.crt
+        - name: registry-config
+          mountPath: /etc/registry/config.yml
+          subPath: config.yml
+      volumes:
+      - name: registry-root-certificate
+        secret:
+          secretName: "Harbor-key-file"
+      - name: registry-config
+        configMap:
+          name: "{{ template "harbor.fullname" . }}-registry"

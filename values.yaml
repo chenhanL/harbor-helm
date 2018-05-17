@@ -1,0 +1,65 @@
+# The tag for Harbor docker images.
+harborImageTag: &harbor_image_tag v1.5.0
+
+# The FQDN for Harbor service.
+externalDomain: registry.sensetime.com
+# If set to true, you don't need to set tlsCrt/tlsKey/caCrt, but must add
+# Harbor FQDN as insecure-registries for your docker client.
+insecureRegistry: false
+# The TLS certificate for Harbor. The common name of tlsCrt must match the externalDomain above.
+tlsCrt:
+tlsKey:
+caCrt:
+
+## mysql
+#
+mysql_host: ~
+mysql_port: 3306
+mysql_user: "xxxx"
+mysql_pass: "xxx"
+mysql_database: "xxxx"
+
+## adminserver
+#
+adminserver_authenticationMode: "ldap_auth"
+adminserver_ldap_url: "ldap://ldap.example.com"
+adminserver_ldap_searchDN: "uid=someone,ou=people,dc=example,dc=com"
+adminserver_ldap_searchPWD: "xxxx"
+adminserver_ldap_baseDN: "ou=people,dc=example,dc=com"
+
+adminserver_image_repository: vmware/harbor-adminserver
+adminserver_image_tag: *harbor_image_tag
+adminserver_image_pullPolicy: IfNotPresent
+adminserver_selfRegistration: "on"
+adminserver_ldap_filter: "(objectClass=person)"
+adminserver_ldap_uid: "uid"
+adminserver_ldap_scope: "3"
+adminserver_ldap_timeout: "5"
+
+
+## jobservice
+#
+jobservice_image_repository: vmware/harbor-jobservice
+jobservice_image_tag: *harbor_image_tag
+jobservice_image_pullPolicy: IfNotPresent
+
+## UI
+#
+ui_image_repository: vmware/harbor-ui
+ui_image_tag: *harbor_image_tag
+ui_image_pullPolicy: IfNotPresent
+
+## registry
+#
+registry_image_repository: vmware/registry-photon
+registry_image_tag: v2.6.2-v1.5.0
+registry_image_pullPolicy: IfNotPresent
+
+registry_objectStorage_swift_url: xxxx
+registry_objectStorage_swift_username: xxx
+registry_objectStorage_swift_password: xxx
+registry_objectStorage_swift_domain: xxx
+registry_objectStorage_swift_container: xxx
+registry_objectStorage_swift_tenantid: xxx
+registry_objectStorage_swift_authversion: xxx
+registry_objectStorage_swift_region: xxx
