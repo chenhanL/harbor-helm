@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: jobservice
-        image: {{ .Values_jobservice_image_repository }}:{{ .Values_jobservice_image_tag }}
+        image: "{{ .Values_jobservice_image_repository }}:{{ .Values_jobservice_image_tag }}"
         imagePullPolicy: {{ .Values_jobservice_image_pullPolicy }}
         envFrom:
         - secretRef:
