@@ -50,5 +50,5 @@ spec:
         secret:
           secretName: "harbor-key-file"
           items:
-            - key: secretKey
-              path: key
+          - key: secretKey
+            path: key
