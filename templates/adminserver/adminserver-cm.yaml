@@ -60,3 +60,4 @@ data:
   UAA_CLIENTSECRET: ""
   UAA_VERIFY_CERT: "True"
   REGISTRY_STORAGE_PROVIDER_NAME: "filesystem"
+  CFG_DRIVER: "json"
