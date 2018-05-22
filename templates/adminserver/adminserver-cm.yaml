@@ -48,7 +48,7 @@ data:
   CFG_EXPIRATION: "5"
   GODEBUG: "netdns=cgo"
   ADMIRAL_URL: "NA"
-  RESET: "false"
+  RESET: "true"
   WITH_CLAIR: "false"
   CLAIR_DB_HOST: "{{ .Release.Name }}-postgresql"
   CLAIR_DB_PORT: "5432"
