@@ -21,7 +21,6 @@ spec:
       - name: adminserver
         image: "{{ .Values.adminserver_image_repository }}:{{ .Values.adminserver_image_tag }}"
         imagePullPolicy: "{{ .Values.adminserver_image_pullPolicy }}"
-        command: ["sh", "-c", "mkdir /etc/config; chown harbor:harbor /etc/config; /harbor/start.sh"]
         envFrom:
         - configMapRef:
             name: "{{ template "harbor.fullname" . }}-adminserver"
@@ -31,14 +30,14 @@ spec:
         - name: PORT
           value: "8080"
         - name: JSON_CFG_STORE_PATH
-          value: /etc/adminserver/config/config.json
+          value: /harbor/config/config.json
         - name: KEY_PATH
-          value: /etc/adminserver/key
+          value: /harbor/key
         ports:
         - containerPort: 8080
         volumeMounts:
         - name: adminserver-key
-          mountPath: /etc/adminserver/key
+          mountPath: /harbor/key
           subPath: key
       volumes:
       - name: adminserver-key
