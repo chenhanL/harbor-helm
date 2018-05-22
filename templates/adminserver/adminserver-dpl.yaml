@@ -30,14 +30,14 @@ spec:
         - name: PORT
           value: "8080"
         - name: JSON_CFG_STORE_PATH
-          value: /harbor/config/config.json
+          value: /tmp/config/config.json
         - name: KEY_PATH
-          value: /harbor/key
+          value: /tmp/key
         ports:
         - containerPort: 8080
         volumeMounts:
         - name: adminserver-key
-          mountPath: /harbor/key
+          mountPath: /tmp/key
           subPath: key
       volumes:
       - name: adminserver-key
