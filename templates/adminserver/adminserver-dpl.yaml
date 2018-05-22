@@ -21,6 +21,7 @@ spec:
       - name: adminserver
         image: "{{ .Values.adminserver_image_repository }}:{{ .Values.adminserver_image_tag }}"
         imagePullPolicy: "{{ .Values.adminserver_image_pullPolicy }}"
+        command: ["sh", "-c", "mkdir /etc/config; chown harbor:harbor /etc/config; /harbor/start.sh"]
         envFrom:
         - configMapRef:
             name: "{{ template "harbor.fullname" . }}-adminserver"
