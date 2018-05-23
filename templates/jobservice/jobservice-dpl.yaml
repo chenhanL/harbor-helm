@@ -58,5 +58,4 @@ spec:
           - key: secretKey
             path: key
       - name: jobservice-log
-        persistentVolumeClaim:
-          claimName: harbor-jobservice-vol
+        emptyDir: {}
