@@ -1,0 +1,32 @@
+apiVersion: apps/v1beta2
+kind: StatefulSet
+metadata:
+  name: "{{ template "harbor.fullname" . }}-redis"
+  labels:
+{{ include "harbor.labels" . | indent 4 }}
+    component: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+{{ include "harbor.matchLabels" . | indent 6 }}
+      component: redis
+  template:
+    metadata:
+      labels:
+{{ include "harbor.labels" . | indent 8 }}
+        component: redis
+    spec:
+      containers:
+      - name: redis
+        image: "{{ .Values.redis_image_repository }}:{{ .Values.redis_image_tag }}"
+        imagePullPolicy: {{ .Values_redis_image_pullPolicy }}
+        ports:
+        - containerPort: 6379
+        volumeMounts:
+        - name: redis-data
+          mountPath: /data
+      volumes:
+      - name: redis-data
+        persistentVolumeClaim:
+          claimName: harbor-redis-vol

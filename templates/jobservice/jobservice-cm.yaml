@@ -11,3 +11,17 @@ data:
 
     [prod]
     httpport = 8080
+  config.yml: |+
+   protocol: "http"
+   port: 8080
+   worker_pool:
+     workers: {{ .Values.jobservice_maxWorkers }}
+     backend: "redis"
+     redis_pool:
+       redis_url: "{{ template "harbor.fullname" . }}-redis:6379"
+       namespace: "harbor_job_service_namespace"
+   logger:
+     path: "/var/log/jobs"
+     level: "INFO"
+     archive_period: 14 #days
+   admin_server: "http://{{ template "harbor.fullname" . }}-adminserver"

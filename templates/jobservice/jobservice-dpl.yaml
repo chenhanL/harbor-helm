@@ -39,6 +39,9 @@ spec:
         - name: jobservice-config
           mountPath: /etc/jobservice/app.conf
           subPath: app.conf
+        - name: jobservice-config
+          mountPath: /etc/jobservice/config.yml
+          subPath: config.yml
         - name: jobservice-secrets
           mountPath: /etc/jobservice/key
           subPath: key

@@ -42,12 +42,19 @@ adminserver_ldap_timeout: "5"
 jobservice_image_repository: vmware/harbor-jobservice
 jobservice_image_tag: *harbor_image_tag
 jobservice_image_pullPolicy: IfNotPresent
+jobservice_maxWorkers: 5
 
 ## UI
 #
 ui_image_repository: vmware/harbor-ui
 ui_image_tag: *harbor_image_tag
 ui_image_pullPolicy: IfNotPresent
+
+## redis
+#
+redis_image_repository: vmware/redis-photon
+redis_image_tag: *harbor_image_tag
+redis_image_pullPolicy: IfNotPresent
 
 ## registry
 #
