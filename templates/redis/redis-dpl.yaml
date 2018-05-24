@@ -20,7 +20,7 @@ spec:
       containers:
       - name: redis
         image: "{{ .Values.redis_image_repository }}:{{ .Values.redis_image_tag }}"
-        imagePullPolicy: {{ .Values_redis_image_pullPolicy }}
+        imagePullPolicy: {{ .Values.redis_image_pullPolicy }}
         ports:
         - containerPort: 6379
         volumeMounts:
@@ -28,4 +28,5 @@ spec:
           mountPath: /data
       volumes:
       - name: redis-data
-        emptyDir: {}
+        persistentVolumeClaim:
+          claimName: harbor-redis-vol
